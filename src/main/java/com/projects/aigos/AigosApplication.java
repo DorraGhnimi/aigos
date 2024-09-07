@@ -26,15 +26,20 @@ public class AigosApplication implements CommandLineRunner {
 	}
 
 	public void run(String ... args) {
-		Profile profile =  new Profile("id", "Naruto", "Usumaki", 18, "Japneese", Gender.Male, "Shinubi", "naruto.jpg", "ESFP");
-		profileRepository.save(profile);
+		profileRepository.deleteAll();
+		conversationRepository.deleteAll();
+
+		Profile naruto =  new Profile("1", "Naruto", "Usumaki", 18, "Japneese", Gender.Male, "Shinubi", "naruto.jpg", "ESFP");
+		profileRepository.save(naruto);
+		Profile sasuke =  new Profile("2", "Sasuke", "Uchiha", 18, "Japneese", Gender.Male, "Shinubi", "sasuke.jpg", "ISTJ");
+		profileRepository.save(sasuke);
 		profileRepository.findAll().forEach(System.out::println);
 
 		Conversation conversation = new Conversation(
 				"1",
-				profile,
+				naruto.id(),
 				Arrays.asList(
-						new ChatMessage("Hello",  profile.id(), LocalDateTime.now())
+						new ChatMessage("Hello",  naruto.id(), LocalDateTime.now())
 				)
 		);
 		conversationRepository.save(conversation);
