@@ -3,6 +3,7 @@ package com.projects.aigos.conversation;
 import com.projects.aigos.profile.ProfileRepository;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,11 @@ public class ConversationController {
     public ConversationController(ConversationRepository conversationRepository, ProfileRepository profileRepository) {
         this.conversationRepository = conversationRepository;
         this.profileRepository = profileRepository;
+    }
+
+    @GetMapping("/conversations/{conversationId")
+    public Conversation fetchConversation(@PathVariable String conversationId){
+        return conversationRepository.findById(conversationId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conversation not found for id " + conversationId));
     }
 
     @PostMapping("/conversations")
@@ -46,7 +52,7 @@ public class ConversationController {
                 LocalDateTime.now()
         );
         conversation.messages().add(validChatMessage);
-        conversationRepository.save(conversation);
+        return conversationRepository.save(conversation);
     }
 
     public record ConversationRequest(String profileId) {};
