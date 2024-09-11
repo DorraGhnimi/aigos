@@ -6,9 +6,11 @@ public record Profile(
         String lastName,
         int age,
         String ethnicity,
+        String religion,
         Gender gender,
         String bio,
         String imageUrl,
+        String profession,
         String mtbi
 ) {
 }
