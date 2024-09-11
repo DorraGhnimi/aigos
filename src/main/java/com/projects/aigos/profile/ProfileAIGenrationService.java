@@ -30,7 +30,7 @@ public class ProfileAIGenrationService {
     private final List<Gender> genders = new ArrayList<>(List.of(Gender.Male, Gender.Female));
     private final List<String> ethnicities = new ArrayList<>(List.of("Arab", "Black", "Amazigh", "Asian", "White", "Hispanic", "Indian", "Pacific Islander", "American Indian"));
     private final List<String> religions = new ArrayList<>(List.of("Muslim", "Christian", "Jew", "Atheist", "Agnostic"));
-
+    private final List<String> mbtiTypes = new ArrayList<>(List.of("ENTJ", "ENFJ", "ESFJ", "ESTJ", "ENTP", "ENFP", "ESFP", "ESTP", "INTJ", "INFJ", "ISFJ", "ISTJ", "INTP", "INFP", "ISFP", "ISTP"));
 
     private final OllamaChatModel chatModel;
     private final ImageGenerationService imageGenerationService;
@@ -59,8 +59,9 @@ public class ProfileAIGenrationService {
             Collections.shuffle(genders);
             Collections.shuffle(ethnicities);
             Collections.shuffle(religions);
+            Collections.shuffle(mbtiTypes);
 
-            String promptString = STR."Create a tinder like profile persona for a person with the following properties:age = \{(int) (Math.random() * (70 - 20 + 1) + 20)}, gender = \{genders.getFirst().toString()}, ethnicity = \{ethnicities.getFirst()}, religion = \{religions.getFirst()} including first name and last name, mbti type, profession and a bio. Execute the addGeneratedProfileToList function";
+            String promptString = STR."Create a tinder like profile persona for a person with the following properties:age = \{(int) (Math.random() * (70 - 20 + 1) + 20)}, gender = \{genders.getFirst().toString()}, ethnicity = \{ethnicities.getFirst()}, religion = \{religions.getFirst()}, mbti type= \{mbtiTypes.getFirst()}, including first name and last name, profession and a bio. Execute the addGeneratedProfileToList function";
             // make a call to AI to generate sample profile
             ChatResponse profileResponse = chatModel.call(
                     new Prompt(
@@ -77,12 +78,9 @@ public class ProfileAIGenrationService {
         }
         // save profile in a json file
         saveProfilesToJsonFile(newGeneratedProfilesWithImages);
-        // open resulted json file and save content in DB
-        saveProfilesToDB();
-
     }
 
-    private void saveProfilesToDB() {
+    public void saveProfilesToDB() {
         profileRepository.deleteAll();
         Gson gson = new Gson();
         try {

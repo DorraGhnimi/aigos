@@ -19,5 +19,7 @@ public class AigosApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		profileAIGenrationService.generateProfiles();
+		// open resulted json file and save content in DB
+		profileAIGenrationService.saveProfilesToDB();
 	}
 }

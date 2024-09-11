@@ -1,5 +1,17 @@
 [
   {
+    "id": "45370097-4e9c-41cd-94e5-5bd948699613",
+    "lastName": "Kim",
+    "age": 47,
+    "ethnicity": "Asian",
+    "religion": "Christian",
+    "gender": "Male",
+    "bio": "Software engineer by day, musician by night, always looking for someone to share my passion with.",
+    "imageUrl": "45370097-4e9c-41cd-94e5-5bd948699613.jpg",
+    "profession": "Software Engineer",
+    "mtbi": "ENTJ"
+  },
+  {
     "id": "5503038c-218c-4562-af07-10deb4bcca9f",
     "lastName": "Garcia",
     "age": 37,
@@ -8,8 +20,8 @@
     "gender": "Male",
     "bio": "Software engineer by day, music lover by night.",
     "imageUrl": "5503038c-218c-4562-af07-10deb4bcca9f.jpg",
-    "profession": "INFJ",
-    "mtbi": "Software Engineer"
+    "profession": "Software Engineer",
+    "mtbi": "INFJ"
   },
   {
     "id": "3c71c2a1-33e6-4599-ad00-00bc57cddb46",
@@ -35,7 +47,7 @@
     "bio": "When I\u0027m not working, you can find me trying out new restaurants or hiking with my friends.",
     "imageUrl": "3bbb206f-1ca9-4115-933c-37a0bb2ef19d.jpg",
     "profession": "Teacher",
-    "mtbi": "INFJ"
+    "mtbi": "ISFJ"
   },
   {
     "id": "4882cf31-ee17-4a30-abdb-38e53beda4fc",
@@ -48,7 +60,7 @@
     "bio": "Outdoor enthusiast, always up for an adventure. Looking for someone who shares my passion for trying new things.",
     "imageUrl": "4882cf31-ee17-4a30-abdb-38e53beda4fc.jpg",
     "profession": "Football player",
-    "mtbi": "INFJ"
+    "mtbi": "ESFP"
   },
   {
     "id": "500ba97f-f151-4895-828b-77fd93113a12",
@@ -61,7 +73,7 @@
     "bio": "I love trying out new restaurants and hiking with friends.",
     "imageUrl": "500ba97f-f151-4895-828b-77fd93113a12.jpg",
     "profession": "Lawyer",
-    "mtbi": "INFJ"
+    "mtbi": "ESFJ"
   },
   {
     "id": "8499f1ca-1b70-419e-8db6-0cf3f65a2caa",
@@ -87,6 +99,6 @@
     "bio": "Grandma of two, loves reading and spending time with family.",
     "imageUrl": "69e96be7-17cb-4fec-92ce-7484b5025a6f.jpg",
     "profession": "Grandma",
-    "mtbi": "INFJ"
+    "mtbi": "ITFP"
   }
 ]
