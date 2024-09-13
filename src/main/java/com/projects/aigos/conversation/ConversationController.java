@@ -29,7 +29,7 @@ public class ConversationController {
     public Conversation fetchConversation(@PathVariable String conversationId){
         return conversationRepository.findById(conversationId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conversation not found for id " + conversationId));
     }
-
+/*
     @PostMapping("/conversations")
     public Conversation createNewConversation(@RequestBody ConversationRequest request) {
         profileRepository.findById(request.profileId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Profile not found for id " + request.profileId()));
@@ -41,6 +41,7 @@ public class ConversationController {
         );
         return conversationRepository.save(conversation);
     }
+*/
 
     @PostMapping("/conversations/{conversationId}")
     public Conversation addMessageToConversation(@PathVariable String conversationId, @RequestBody(required = true) ChatMessage message){
