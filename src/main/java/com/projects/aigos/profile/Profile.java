@@ -3,7 +3,7 @@ package com.projects.aigos.profile;
 public record Profile(
         String id,
         String firstname,
-        String lastName,
+        String lastname,
         int age,
         String ethnicity,
         String religion,

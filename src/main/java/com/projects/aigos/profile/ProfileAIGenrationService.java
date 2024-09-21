@@ -2,6 +2,8 @@ package com.projects.aigos.profile;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.projects.aigos.conversation.ConversationRepository;
+import com.projects.aigos.match.MatchRepository;
 
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -19,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 @Configuration
@@ -35,6 +38,8 @@ public class ProfileAIGenrationService {
     private final OllamaChatModel chatModel;
     private final ImageGenerationService imageGenerationService;
     private final ProfileRepository profileRepository;
+    private final ConversationRepository conversationRepository;
+    private final MatchRepository matchRepository;
 
     private final List<Profile> generatedProfiles = new ArrayList<>();
     @Value("${start-up.actions.doGenerateProfiles}")
@@ -42,10 +47,15 @@ public class ProfileAIGenrationService {
     @Value("${start-up.actions.nbProfiles}")
     private int nbProfiles;
 
-    public ProfileAIGenrationService(OllamaChatModel chatClient, ImageGenerationService imageGenerationService, ProfileRepository profileRepository) {
+    @Value("#{${tinderai.character.user}}")
+    private Map<String, String> userProfileProperties;
+
+    public ProfileAIGenrationService(OllamaChatModel chatClient, ImageGenerationService imageGenerationService, ProfileRepository profileRepository, ConversationRepository conversationRepository, MatchRepository matchRepository) {
         this.chatModel = chatClient;
         this.imageGenerationService = imageGenerationService;
         this.profileRepository = profileRepository;
+        this.conversationRepository = conversationRepository;
+        this.matchRepository = matchRepository;
     }
 
     public void generateProfiles() {
@@ -82,6 +92,8 @@ public class ProfileAIGenrationService {
 
     public void saveProfilesToDB() {
         profileRepository.deleteAll();
+        matchRepository.deleteAll();
+        conversationRepository.deleteAll();
         Gson gson = new Gson();
         try {
             List<Profile> profiles = gson.fromJson(
@@ -93,6 +105,24 @@ public class ProfileAIGenrationService {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+
+
+        System.out.println("userProfileProperties=======" + userProfileProperties);
+        
+        Profile userProfile = new Profile(
+                userProfileProperties.get("id"),
+                userProfileProperties.get("firstName"),
+                userProfileProperties.get("lastname"),
+                Integer.parseInt(userProfileProperties.get("age")),
+                userProfileProperties.get("ethnicity"),
+                userProfileProperties.get("religion"),
+                Gender.valueOf(userProfileProperties.get("gender")),
+                userProfileProperties.get("bio"),
+                userProfileProperties.get("imageUrl"),
+                userProfileProperties.get("profession"),
+                userProfileProperties.get("myersBriggsPersonalityType")
+        );
+        profileRepository.save(userProfile);
     }
 
     @Bean

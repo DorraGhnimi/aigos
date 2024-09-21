@@ -39,7 +39,7 @@ public class ImageGenerationService {
         profile = new Profile(
                 uuid,
                 profile.firstname(),
-                profile.lastName(),
+                profile.lastname(),
                 profile.age(),
                 profile.ethnicity(),
                 profile.religion(),
@@ -51,7 +51,7 @@ public class ImageGenerationService {
         );
         try {
             // make request to stable diffusion
-            System.out.println(STR."Creating image for \{profile.firstname()} \{profile.lastName()}(\{profile.ethnicity()})");
+            System.out.println(STR."Creating image for \{profile.firstname()} \{profile.lastname()}(\{profile.ethnicity()})");
             HttpRequest request = buildRequest(profile);
             HttpResponse response = this.httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             // Save the generated image in the resources folder
