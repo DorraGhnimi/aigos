@@ -1,4 +1,4 @@
-package com.projects.aigos;
+package com.projects.aigos.aiChat;
 
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
