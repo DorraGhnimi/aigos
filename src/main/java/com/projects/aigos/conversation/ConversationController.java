@@ -35,7 +35,8 @@ public class ConversationController {
     @PostMapping("/conversations/{conversationId}")
     public Conversation addMessageToConversation(@PathVariable String conversationId, @RequestBody(required = true) ChatMessage message){
         Conversation conversation = conversationRepository.findById(conversationId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conversation not found for id " + conversationId));
-        profileRepository.findById(message.authorId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Profile not found for author of the message " + message.authorId()));
+        profileRepository.findById(message.authorId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Profile not found for author of the message " + message.authorId()));
 
         if(!message.authorId().equals(conversation.profileId()) && !message.authorId().equals("user")) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "message author is incompatible with requested conversations profiles");

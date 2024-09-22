@@ -108,7 +108,7 @@ public class ProfileAIGenrationService {
 
 
         System.out.println("userProfileProperties=======" + userProfileProperties);
-        
+
         Profile userProfile = new Profile(
                 userProfileProperties.get("id"),
                 userProfileProperties.get("firstName"),
